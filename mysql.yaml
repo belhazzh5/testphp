@@ -1,0 +1,39 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-5.4.2
+
+# NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
+# enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
+# has the right permissions to access the volumes added.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2025-06-25T11:05:19Z"
+  labels:
+    app: mysql-pod
+  name: mysql-pod
+spec:
+  containers:
+  - args:
+    - mysqld
+    env:
+    - name: MYSQL_DATABASE
+      value: testdb
+    - name: MYSQL_USER
+      value: testuser
+    - name: MYSQL_ROOT_PASSWORD
+      value: test
+    - name: MYSQL_PASSWORD
+      value: TestPass123!
+    image: docker.io/library/mysql:5.7
+    name: mysql
+    volumeMounts:
+    - mountPath: /var/lib/mysql
+      name: c4faaff05a0488386db9aacffb40cf6f76e94464e1736e920a11302d7868ab50-pvc
+  volumes:
+  - name: c4faaff05a0488386db9aacffb40cf6f76e94464e1736e920a11302d7868ab50-pvc
+    persistentVolumeClaim:
+      claimName: c4faaff05a0488386db9aacffb40cf6f76e94464e1736e920a11302d7868ab50
+
