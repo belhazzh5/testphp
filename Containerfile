@@ -1,7 +1,7 @@
 FROM php:8.2-apache
 
 # Copy website files
-COPY public/ /var/www/html/
+COPY . /var/www/html/
 
 # Enable Apache rewrite module (optional for CMS)
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
